@@ -6,7 +6,8 @@ pipeline {
             steps {
                 script {
                     // Compile the .cpp file using a shell script
-                    sh 'g++ -o my_program my_program.cpp'
+                    build 'PES2UG21CS180-1'
+                    sh 'g++ main.cpp -o output'
                 }
             }
         }
@@ -15,7 +16,7 @@ pipeline {
             steps {
                 script {
                     // Print the output of the compiled program
-                    sh './my_program'
+                    sh './output'
                 }
             }
         }
@@ -24,7 +25,7 @@ pipeline {
             steps {
                 script {
                     // In a real-world scenario, you might deploy your application here
-                    echo 'Deployment steps go here'
+                    echo 'deploy'
                 }
             }
         }
