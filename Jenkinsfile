@@ -1,41 +1,31 @@
 pipeline {
-    agent any
-
+    agent any 
     stages {
+        
         stage('Build') {
             steps {
-                script {
-                    // Compile the .cpp file
-                    sh 'g++ main1.cpp -o output'
-                    // Archive the compiled binary as an artifact
-                    archiveArtifacts artifacts: 'output', fingerprint: true
-                }
+                build 'PES2UG21CS180-1'
+                sh 'g++ main1.cpp -o output'
             }
         }
 
         stage('Test') {
-            steps {
-                script {
-                    // Print the output of the compiled program
-                    sh './output'
-                }
+            steps { 
+                sh './output'
             }
         }
 
-        stage('Deploy') {
-            steps {
-                script {
-                    // Placeholder for deployment steps
-                    echo 'Deploying...'
-                }
-            }
-        }
-    }
+        stage('Deploy') { 
+            steps { 
+                echo 'Deployed' 
+            } 
+        } 
 
-    post {
-        failure {
-            // Display 'pipeline failed' only in case of failure
-            echo 'Pipeline failed'
-        }
-    }
+    } 
+
+    post { 
+        failure { 
+            error 'Pipeline failed' 
+        }  
+    }  
 }
