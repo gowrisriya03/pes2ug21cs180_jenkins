@@ -1,31 +1,30 @@
 pipeline {
-    agent any 
+    agent any
+
     stages {
-        
         stage('Build') {
             steps {
-                build 'PES2UG21CS180-1'
-                sh 'g++ main1.cpp -o output'
+                sh 'g++ hello.cpp -o output'
+                archiveArtifacts artifacts: 'output', fingerprint: true
             }
         }
 
         stage('Test') {
-            steps { 
+            steps {
                 sh './output'
             }
         }
 
-        stage('Deploy') { 
-            steps { 
-                echo 'Deployed' 
-            } 
-        } 
+        stage('Deploy') {
+            steps {
+                echo 'Deployed'
+            }
+        }
+    }
 
-    } 
-
-    post { 
-        failure { 
-            error 'Pipeline failed' 
-        }  
-    }  
+    post {
+        failure {
+            echo 'Pipeline failed'
+        }
+    }
 }
