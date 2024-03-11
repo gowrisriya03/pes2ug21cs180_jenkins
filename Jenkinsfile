@@ -5,9 +5,10 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Compile the .cpp file using a shell script
-                    build 'PES2UG21CS180-1'
+                    // Compile the .cpp file
                     sh 'g++ main1.cpp -o output'
+                    // Archive the compiled binary as an artifact
+                    archiveArtifacts artifacts: 'output', fingerprint: true
                 }
             }
         }
@@ -24,16 +25,16 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // In a real-world scenario, you might deploy your application here
-                    echo 'deploy'
+                    // Placeholder for deployment steps
+                    echo 'Deploying...'
                 }
             }
         }
     }
 
     post {
-        always {
-            // Display 'pipeline failed' in case of any errors within the pipeline
+        failure {
+            // Display 'pipeline failed' only in case of failure
             echo 'Pipeline failed'
         }
     }
