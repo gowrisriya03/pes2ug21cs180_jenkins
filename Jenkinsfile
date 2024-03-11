@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'g++ hello.cpp -o output'
+                sh 'g++ main1.cpp -o output'
                 archiveArtifacts artifacts: 'output', fingerprint: true
             }
         }
